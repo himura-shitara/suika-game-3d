@@ -8,24 +8,28 @@ public class FruitsCombine : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (name == other.gameObject.name)
+        if (!GameOverManager.Instance.IsGameOver)
         {
-            if (!IsCombined)
+            if (name == other.gameObject.name)
             {
-                IsCombined = true;
-                other.gameObject.GetComponent<FruitsCombine>().Combine();
-                ScoreManager.Instance.Score(combinationScore);
-                if (nextFruit is not null)
+                if (!IsCombined)
                 {
-                    Instantiate(
-                        nextFruit,
-                        Vector3.Lerp(
-                            transform.position,
-                            other.transform.position,
-                            0.5f),
-                        Quaternion.identity);
+                    IsCombined = true;
+                    other.gameObject.GetComponent<FruitsCombine>().Combine();
+                    ScoreManager.Instance.UpScore(combinationScore);
+                    if (nextFruit is not null)
+                    {
+                        Instantiate(
+                            nextFruit,
+                            Vector3.Lerp(
+                                transform.position,
+                                other.transform.position,
+                                0.5f),
+                            Quaternion.identity);
+                    }
+
+                    Destroy(gameObject);
                 }
-                Destroy(gameObject);
             }
         }
     }
