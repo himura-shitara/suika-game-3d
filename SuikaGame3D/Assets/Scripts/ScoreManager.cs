@@ -5,7 +5,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     [SerializeField] private Text scoreText;
-    private int _score = 0;
+    public int Score { get; private set; }
     
     private void Awake()
     {
@@ -21,12 +21,12 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        Score(score: 0);
+        UpScore(score: 0);
     }
 
-    public void Score(int score)
+    public void UpScore(int score)
     {
-        _score += score;
-        scoreText.text = $"Score:\n{_score}";
+        Score += score;
+        scoreText.text = $"Score:\n{Score}";
     }
 }
