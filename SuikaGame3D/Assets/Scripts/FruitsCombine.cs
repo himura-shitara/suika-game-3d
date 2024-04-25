@@ -3,6 +3,7 @@ using UnityEngine;
 public class FruitsCombine : MonoBehaviour
 {
     [SerializeField] private GameObject nextFruit;
+    [SerializeField] private int combinationScore;
     public bool IsCombined { get; private set; }
     
     private void OnCollisionEnter(Collision other)
@@ -13,6 +14,7 @@ public class FruitsCombine : MonoBehaviour
             {
                 IsCombined = true;
                 other.gameObject.GetComponent<FruitsCombine>().Combine();
+                ScoreManager.Instance.Score(combinationScore);
                 if (nextFruit is not null)
                 {
                     Instantiate(
