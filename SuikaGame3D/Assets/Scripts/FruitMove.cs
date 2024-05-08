@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class FruitMove : MonoBehaviour
 {
-    [SerializeField] private GameObject fruit;
+    [SerializeField] private GameObject[] fruits;
+    [SerializeField] private Transform initialPoint;
+    private GameObject _fruit;
     private readonly float _speed = 3f;
     private Rigidbody _fruitRb;
 
     private void Start()
     {
-        _fruitRb = fruit.GetComponent<Rigidbody>();
+        InstantiateRandomFruit(limitIndex: fruits.Length);
     }
 
     private void Update()
@@ -16,16 +18,23 @@ public class FruitMove : MonoBehaviour
         var inputX = Input.GetAxis("Horizontal");
         var inputY = Input.GetAxis("Vertical");
 
-        if (fruit is not null)
+        if (_fruit is not null)
         {
-            fruit.transform.position += new Vector3(inputX, 0, inputY) * (_speed * Time.deltaTime);
+            _fruit.transform.position += new Vector3(inputX, 0, inputY) * (_speed * Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _fruitRb.useGravity = true;
-                fruit = null;
+                _fruit = null;
                 _fruitRb = null;
             }
         }
+    }
+
+    private void InstantiateRandomFruit(int limitIndex)
+    {
+        var index = Random.Range(0, limitIndex);
+        _fruit = Instantiate(fruits[index], initialPoint.position, Quaternion.identity);
+        _fruitRb = _fruit.GetComponent<Rigidbody>();
     }
 }
