@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextFruit: {fileID: 0}
+  combinationScore: 1000

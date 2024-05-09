@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextFruit: {fileID: 1568229679034885407, guid: 7adf79c2f075444e4af9907ffb68c73e, type: 3}
+  combinationScore: 200
