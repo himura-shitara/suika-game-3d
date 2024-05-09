@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FruitMove : MonoBehaviour
@@ -10,7 +11,7 @@ public class FruitMove : MonoBehaviour
 
     private void Start()
     {
-        InstantiateRandomFruit(limitIndex: fruits.Length);
+        InstantiateRandomFruit(limitIndex: fruits.Length - 3);
     }
 
     private void Update()
@@ -27,8 +28,14 @@ public class FruitMove : MonoBehaviour
                 _fruitRb.useGravity = true;
                 _fruit = null;
                 _fruitRb = null;
+                StartCoroutine(DelayMethod(delay: 1f));
             }
         }
+    }
+    
+    private IEnumerator DelayMethod(float delay) {
+        yield return new WaitForSeconds(delay);
+        InstantiateRandomFruit(limitIndex: fruits.Length - 2);
     }
 
     private void InstantiateRandomFruit(int limitIndex)
