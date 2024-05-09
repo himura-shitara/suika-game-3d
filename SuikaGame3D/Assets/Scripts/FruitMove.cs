@@ -43,5 +43,6 @@ public class FruitMove : MonoBehaviour
         var index = Random.Range(0, limitIndex);
         _fruit = Instantiate(fruits[index], initialPoint.position, Quaternion.identity);
         _fruitRb = _fruit.GetComponent<Rigidbody>();
+        _fruitRb.useGravity = false;
     }
 }
