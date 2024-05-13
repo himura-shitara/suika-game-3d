@@ -26,7 +26,6 @@ public class FruitMove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _fruitCol.enabled = true;
                 _fruitRb.useGravity = true;
                 _fruit = null;
                 _fruitCol = null;
@@ -47,7 +46,6 @@ public class FruitMove : MonoBehaviour
         _fruit = Instantiate(fruits[index], initialPoint.position, Quaternion.identity);
         _fruitCol = _fruit.GetComponent<SphereCollider>();
         _fruitRb = _fruit.GetComponent<Rigidbody>();
-        _fruitCol.enabled = false;
         _fruitRb.useGravity = false;
     }
 }
