@@ -10,6 +10,8 @@ public class FruitMove : MonoBehaviour
 
     private void Start()
     {
+        // 「名前付き引数」という記法を用いている
+        // メソッドの limitIndex という引数に fruits.Length を渡す、ということを明示的に書いている
         InstantiateRandomFruit(limitIndex: fruits.Length);
     }
 
