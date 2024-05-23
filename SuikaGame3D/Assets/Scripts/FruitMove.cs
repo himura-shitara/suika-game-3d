@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FruitMove : MonoBehaviour
@@ -12,7 +13,7 @@ public class FruitMove : MonoBehaviour
     {
         // 「名前付き引数」という記法を用いている
         // メソッドの limitIndex という引数に fruits.Length を渡す、ということを明示的に書いている
-        InstantiateRandomFruit(limitIndex: fruits.Length);
+        InstantiateRandomFruit(limitIndex: fruits.Length - 3);  // スイカゲームは初めからでかいフルーツ落ちてこないよな、という思いから最大値を減らしている
     }
 
     private void Update()
@@ -35,8 +36,17 @@ public class FruitMove : MonoBehaviour
                 // フルーツを null にする（フルーツへのアクセスを手放す）
                 _fruit = null;
                 _fruitRigidbody = null;
+                // DelayMethod というコルーチンを呼び出す
+                StartCoroutine(DelayMethod(delay: 1f));
             }
         }
+    }
+    
+    private IEnumerator DelayMethod(float delay) {
+        // delay 秒待機
+        yield return new WaitForSeconds(delay);
+        // スイカゲームは生成時からでかいフルーツ落ちてこないよな、という思いから最大値を減らしている
+        InstantiateRandomFruit(limitIndex: fruits.Length - 2);
     }
 
     private void InstantiateRandomFruit(int limitIndex)
