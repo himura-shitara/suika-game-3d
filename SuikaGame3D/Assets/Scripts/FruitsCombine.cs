@@ -3,6 +3,7 @@ using UnityEngine;
 public class FruitsCombine : MonoBehaviour
 {
     public GameObject nextFruit;
+    public int combinationScore;
     // 合体の処理が済んだフルーツかどうかを表す
     public bool isCombined;
     
@@ -18,6 +19,8 @@ public class FruitsCombine : MonoBehaviour
                 isCombined = true;
                 // 合体相手の Combine メソッドを呼び出す
                 other.gameObject.GetComponent<FruitsCombine>().Combine();
+                // ScoreManager の AddScore メソッドを呼ぶ
+                ScoreManager.Instance.AddScore(combinationScore);
                 if (nextFruit != null)
                 {
                     // 引数は改行して渡すことも可能

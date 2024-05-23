@@ -58,5 +58,7 @@ public class FruitMove : MonoBehaviour
         // 生成したフルーツの Rigidbody コンポーネントを取得
         _fruitRigidbody = _fruit.GetComponent<Rigidbody>();
         _fruitRigidbody.useGravity = false;
+        // ScoreManager の AddScore メソッドを呼ぶ
+        ScoreManager.Instance.AddScore(index * 10);
     }
 }
