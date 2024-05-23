@@ -42,7 +42,7 @@ public class FruitMove : MonoBehaviour
     private void InstantiateRandomFruit(int limitIndex)
     {
         // 0 以上 limitIndex 未満の整数を取得
-        var index = Random.Range(0, limitIndex);
+        int index = Random.Range(0, limitIndex);
         // initialPoint の位置に index に対応したフルーツを生成
         _fruit = Instantiate(fruits[index], initialPoint.position, Quaternion.identity);
         // 生成したフルーツの Rigidbody コンポーネントを取得
