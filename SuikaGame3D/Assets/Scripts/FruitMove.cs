@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class FruitMove : MonoBehaviour
 {
-    [SerializeField] private GameObject[] fruits;
-    [SerializeField] private Transform initialPoint;
+    public GameObject[] fruits;
+    public Transform initialPoint;
     private GameObject _fruit;
-    private readonly float _speed = 3f;
-    private Rigidbody _fruitRb;
+    private float _speed = 3f;
+    private Rigidbody _fruitRigidbody;
 
     private void Start()
     {
@@ -15,26 +15,35 @@ public class FruitMove : MonoBehaviour
 
     private void Update()
     {
+        // Input.GetAxis("Horizontal") で左右方向の入力を取得する
         var inputX = Input.GetAxis("Horizontal");
+        // Input.GetAxis("Vertical") で上下方向の入力を取得する
         var inputY = Input.GetAxis("Vertical");
 
-        if (_fruit is not null)
+        // フルーツが null でない（フルーツへのアクセスを持っている）なら
+        if (_fruit != null)
         {
+            // フルーツの移動
             _fruit.transform.position += new Vector3(inputX, 0, inputY) * (_speed * Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _fruitRb.useGravity = true;
+                // フルーツの重力をオン
+                _fruitRigidbody.useGravity = true;
+                // フルーツを null にする（フルーツへのアクセスを手放す）
                 _fruit = null;
-                _fruitRb = null;
+                _fruitRigidbody = null;
             }
         }
     }
 
     private void InstantiateRandomFruit(int limitIndex)
     {
+        // 0 以上 limitIndex 未満の整数を取得
         var index = Random.Range(0, limitIndex);
+        // initialPoint の位置に index に対応したフルーツを生成
         _fruit = Instantiate(fruits[index], initialPoint.position, Quaternion.identity);
-        _fruitRb = _fruit.GetComponent<Rigidbody>();
+        // 生成したフルーツの Rigidbody コンポーネントを取得
+        _fruitRigidbody = _fruit.GetComponent<Rigidbody>();
     }
 }
