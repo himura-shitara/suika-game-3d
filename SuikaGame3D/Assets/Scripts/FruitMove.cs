@@ -57,5 +57,6 @@ public class FruitMove : MonoBehaviour
         _fruit = Instantiate(fruits[index], initialPoint.position, Quaternion.identity);
         // 生成したフルーツの Rigidbody コンポーネントを取得
         _fruitRigidbody = _fruit.GetComponent<Rigidbody>();
+        _fruitRigidbody.useGravity = false;
     }
 }

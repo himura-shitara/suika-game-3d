@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1813972917812926385}
   - component: {fileID: 7407682926205748286}
   - component: {fileID: 5503361694427483880}
+  - component: {fileID: -6497266825724749528}
   m_Layer: 0
   m_Name: Fruit5
   m_TagString: Untagged
@@ -128,8 +129,21 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6497266825724749528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008819238200001219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb92670d0a743398f376e7f3dbd114e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextFruit: {fileID: 0}
