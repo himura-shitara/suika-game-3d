@@ -2,29 +2,35 @@ using UnityEngine;
 
 public class FruitsCombine : MonoBehaviour
 {
-    [SerializeField] private GameObject nextFruit;
-    [SerializeField] private int combinationScore;
-    public bool IsCombined { get; private set; }
+    public GameObject nextFruit;
+    public int combinationScore;
+    // 合体の処理が済んだフルーツかどうかを表す
+    public bool isCombined;
     
     private void OnCollisionEnter(Collision other)
     {
-        if (!GameOverManager.Instance.IsGameOver)
+        // GameOver 状態でないなら
+        if (!GameOverManager.Instance.isGameOver)
         {
+            // 衝突したオブジェクトと名前が一緒なら
             if (name == other.gameObject.name)
             {
-                if (!IsCombined)
+                // このフルーツがすでに合体の処理が済んでいなければ
+                if (!isCombined)
                 {
-                    IsCombined = true;
+                    // このフルーツを合体処理済みとする
+                    isCombined = true;
+                    // 合体相手の Combine メソッドを呼び出す
                     other.gameObject.GetComponent<FruitsCombine>().Combine();
-                    ScoreManager.Instance.UpScore(combinationScore);
-                    if (nextFruit is not null)
+                    // ScoreManager の AddScore メソッドを呼ぶ
+                    ScoreManager.Instance.AddScore(combinationScore);
+                    if (nextFruit != null)
                     {
+                        // 引数は改行して渡すことも可能
                         Instantiate(
                             nextFruit,
-                            Vector3.Lerp(
-                                transform.position,
-                                other.transform.position,
-                                0.5f),
+                            // Vector3.Lerp を用いて、上位のフルーツの生成場所として自身と合体相手の中間地点を指定している
+                            Vector3.Lerp(transform.position, other.transform.position, 0.5f),
                             Quaternion.identity);
                     }
 
@@ -36,7 +42,8 @@ public class FruitsCombine : MonoBehaviour
 
     public void Combine()
     {
-        IsCombined = true;
+        // このフルーツを合体処理済みとする
+        isCombined = true;
         Destroy(gameObject);
     }
 }

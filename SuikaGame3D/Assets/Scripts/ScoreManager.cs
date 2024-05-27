@@ -3,12 +3,15 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    // 自身のインスタンスを static として定義（詳しくは「シングルトン」で検索）
     public static ScoreManager Instance;
-    [SerializeField] private Text scoreText;
-    public int Score { get; private set; }
+    public Text scoreText;
+    public int Score;
     
     private void Awake()
     {
+        // この辺りの処理もシングルトンという手法に特有のもの
+        // インスタンスの唯一性を担保している
         if (Instance == null)
         {
             Instance = this;
@@ -21,12 +24,18 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        UpScore(score: 0);
+        AddScore(score: 0);
     }
 
-    public void UpScore(int score)
+    public void AddScore(int score)
     {
         Score += score;
-        scoreText.text = $"Score:\n{Score}";
+        /*
+         * Score:
+         * 300
+         *
+         * のように表示される
+         */
+        scoreText.text = "Score:\n" + Score;
     }
 }
