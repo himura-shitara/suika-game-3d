@@ -24,7 +24,8 @@ public class FruitMove : MonoBehaviour
         var inputY = Input.GetAxis("Vertical");
 
         // フルーツが null でない（フルーツへのアクセスを持っている）なら
-        if (_fruit != null)
+        // GameOver 状態でないなら
+        if (_fruit != null && !GameOverManager.Instance.isGameOver)
         {
             // フルーツの移動
             _fruit.transform.position += new Vector3(inputX, 0, inputY) * (_speed * Time.deltaTime);

@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
     // 自身のインスタンスを static として定義（詳しくは「シングルトン」で検索）
     public static ScoreManager Instance;
     public Text scoreText;
-    private int _score = 0;
+    public int Score;
     
     private void Awake()
     {
@@ -29,13 +29,13 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int score)
     {
-        _score += score;
+        Score += score;
         /*
          * Score:
          * 300
          *
          * のように表示される
          */
-        scoreText.text = "Score:\n" + _score;
+        scoreText.text = "Score:\n" + Score;
     }
 }
